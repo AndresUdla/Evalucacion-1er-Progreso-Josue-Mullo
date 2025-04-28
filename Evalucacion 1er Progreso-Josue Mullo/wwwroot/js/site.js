@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.querySelector("#userInput");
 
     button.addEventListener("click", function () {
-        const inputValue = inputField.value || "vacío";
-        alert(`Mi nombre es Josue Mullo, mi hobbie es salir a caminar y el valor del campo de texto es: ${inputValue}`);
+        // Comprobar si el campo está vacío
+        const inputValue = inputField.value.trim();  // Usamos `trim()` para quitar espacios al inicio y final
+        if (inputValue === "") {
+            alert("El campo no puede estar vacío.");
+        } else {
+            alert(`Mi nombre es Josue Mullo, mi hobbie es salir a caminar y el valor del campo de texto es: ${inputValue}`);
+        }
     });
 });
