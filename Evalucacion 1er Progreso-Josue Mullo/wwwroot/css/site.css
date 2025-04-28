@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.img-meme {
+    width: 400px;
+    height: 500px;
+    object-fit: cover; /* Esto asegura que la imagen se ajuste sin deformarse */
+}
