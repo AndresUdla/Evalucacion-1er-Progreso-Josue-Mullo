@@ -17,7 +17,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Models
         public string FechaInicio { get; set; }
 
         [Required]
-        
+        [Range(0, int.MaxValue, ErrorMessage = "Los puntos deben ser un número positivo.")]
         public int PuntosAcumulados { get; set; }
 
         [Required]

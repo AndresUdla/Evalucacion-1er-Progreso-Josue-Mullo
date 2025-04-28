@@ -1,0 +1,100 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
+{
+    /// <inheritdoc />
+    public partial class JosueMullo : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Saldo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    EsActivo = table.Column<bool>(type: "bit", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.ClienteId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recompensa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaInicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PuntosAcumulados = table.Column<int>(type: "int", nullable: false),
+                    TipoRecompensa = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recompensa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Recompensa_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reserva",
+                columns: table => new
+                {
+                    ReservaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaReservaEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaReservaSalida = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorReserva = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reserva", x => x.ReservaId);
+                    table.ForeignKey(
+                        name: "FK_Reserva_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recompensa_ClienteId",
+                table: "Recompensa",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reserva_ClienteId",
+                table: "Reserva",
+                column: "ClienteId");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Recompensa");
+
+            migrationBuilder.DropTable(
+                name: "Reserva");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
+        }
+    }
+}
