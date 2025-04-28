@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Evalucacion_1er_Progreso_Josue_Mullo.Models;
 
 namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
 {

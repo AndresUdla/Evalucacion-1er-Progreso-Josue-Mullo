@@ -12,7 +12,7 @@ using Evalucacion_1er_Progreso_Josue_Mullo.Models;
         {
         }
 
-        public DbSet<Cliente> Cliente { get; set; } = default!;
+        public DbSet<Evalucacion_1er_Progreso_Josue_Mullo.Models.Cliente> Cliente { get; set; } = default!;
 
 public DbSet<Evalucacion_1er_Progreso_Josue_Mullo.Models.Recompensa> Recompensa { get; set; } = default!;
 
