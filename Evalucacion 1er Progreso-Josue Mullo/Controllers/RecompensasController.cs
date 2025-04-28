@@ -56,10 +56,13 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,FechaInicio,PuntosAcumulados,TipoRecompensa,ClienteId")] Recompensa recompensa)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,FechaInicio,PuntosAcumulados,ClienteId")] Recompensa recompensa)
         {
             if (ModelState.IsValid)
             {
+                // Determinar tipo de recompensa basado en puntos
+                recompensa.TipoRecompensa = recompensa.PuntosAcumulados < 500 ? "Silver" : "Gold";
+
                 _context.Add(recompensa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -67,6 +70,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", recompensa.ClienteId);
             return View(recompensa);
         }
+
 
         // GET: Recompensas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -90,7 +94,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,FechaInicio,PuntosAcumulados,TipoRecompensa,ClienteId")] Recompensa recompensa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,FechaInicio,PuntosAcumulados,ClienteId")] Recompensa recompensa)
         {
             if (id != recompensa.Id)
             {
@@ -101,6 +105,9 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
             {
                 try
                 {
+                    // Determinar tipo de recompensa basado en puntos
+                    recompensa.TipoRecompensa = recompensa.PuntosAcumulados < 500 ? "Silver" : "Gold";
+
                     _context.Update(recompensa);
                     await _context.SaveChangesAsync();
                 }
@@ -120,6 +127,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", recompensa.ClienteId);
             return View(recompensa);
         }
+
 
         // GET: Recompensas/Delete/5
         public async Task<IActionResult> Delete(int? id)
