@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Evalucacion_1er_Progreso_Josue_Mullo.Models;
+using Evaluacion_1er_Progreso_Josue_Mullo.Models;
 
 namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
 {
     public class ReservasController : Controller
     {
-        private readonly Evalucacion_1er_Progreso_Josue_MulloContextSQLServer _context;
+        private readonly Evalucacion_1er_Progreso_Josue_MulloContext _context;
 
-        public ReservasController(Evalucacion_1er_Progreso_Josue_MulloContextSQLServer context)
+        public ReservasController(Evalucacion_1er_Progreso_Josue_MulloContext context)
         {
             _context = context;
         }
@@ -21,8 +21,8 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // GET: Reservas
         public async Task<IActionResult> Index()
         {
-            var evalucacion_1er_Progreso_Josue_MulloContextSQLServer = _context.Reserva.Include(r => r.Cliente);
-            return View(await evalucacion_1er_Progreso_Josue_MulloContextSQLServer.ToListAsync());
+            var evalucacion_1er_Progreso_Josue_MulloContext = _context.Reserva.Include(r => r.Cliente);
+            return View(await evalucacion_1er_Progreso_Josue_MulloContext.ToListAsync());
         }
 
         // GET: Reservas/Details/5
@@ -47,7 +47,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // GET: Reservas/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email");
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservaId,FechaReservaEntrada,FechaReservaSalida,ValorReserva,ClienteId")] Reserva reserva)
+        public async Task<IActionResult> Create([Bind("ReservaId,FechaReservaEntrada,FechaReservaSalida,ValorPagar,ClienteId")] Reserva reserva)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", reserva.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", reserva.ClienteId);
             return View(reserva);
         }
 
@@ -81,7 +81,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", reserva.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", reserva.ClienteId);
             return View(reserva);
         }
 
@@ -90,7 +90,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservaId,FechaReservaEntrada,FechaReservaSalida,ValorReserva,ClienteId")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservaId,FechaReservaEntrada,FechaReservaSalida,ValorPagar,ClienteId")] Reserva reserva)
         {
             if (id != reserva.ReservaId)
             {
@@ -117,7 +117,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", reserva.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", reserva.ClienteId);
             return View(reserva);
         }
 

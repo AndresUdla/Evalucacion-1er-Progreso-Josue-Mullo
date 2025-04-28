@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Evalucacion_1er_Progreso_Josue_Mullo.Models;
+using Evaluacion_1er_Progreso_Josue_Mullo.Models;
 
 namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly Evalucacion_1er_Progreso_Josue_MulloContextSQLServer _context;
+        private readonly Evalucacion_1er_Progreso_Josue_MulloContext _context;
 
-        public ClientesController(Evalucacion_1er_Progreso_Josue_MulloContextSQLServer context)
+        public ClientesController(Evalucacion_1er_Progreso_Josue_MulloContext context)
         {
             _context = context;
         }
@@ -53,7 +53,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nombre,Email,Saldo,EsActivo,FechaRegistro")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,Nombre,Saldo,Activo,FechaNacimiento")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nombre,Email,Saldo,EsActivo,FechaRegistro")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nombre,Saldo,Activo,FechaNacimiento")] Cliente cliente)
         {
             if (id != cliente.ClienteId)
             {

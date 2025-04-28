@@ -1,33 +1,33 @@
-﻿@model IEnumerable<Evalucacion_1er_Progreso_Josue_Mullo.Models.Cliente>
+﻿@model IEnumerable<Evaluacion_1er_Progreso_Josue_Mullo.Models.Cliente>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clientes";
 }
 
-<h1>Index</h1>
+<h1>Lista de Clientes</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Crear Nuevo</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.First().ClienteId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.First().Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Saldo)
+                @Html.DisplayNameFor(model => model.First().Saldo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EsActivo)
+                @Html.DisplayNameFor(model => model.First().Activo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
+                @Html.DisplayNameFor(model => model.First().FechaNacimiento)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -35,24 +35,24 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
+                    @Html.DisplayFor(modelItem => item.ClienteId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Saldo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EsActivo)
+                    @Html.DisplayFor(modelItem => item.Activo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClienteId" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.ClienteId" class="btn btn-info btn-sm">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.ClienteId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.ClienteId" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ClienteId" class="btn btn-info btn-sm">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.ClienteId" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
         }

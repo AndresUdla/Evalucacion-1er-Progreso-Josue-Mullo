@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Evalucacion_1er_Progreso_Josue_Mullo.Models.Reserva>
+﻿@model IEnumerable<Evaluacion_1er_Progreso_Josue_Mullo.Models.Reserva>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.FechaReservaSalida)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValorReserva)
+                @Html.DisplayNameFor(model => model.ValorPagar)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cliente)
@@ -37,15 +37,15 @@
                 @Html.DisplayFor(modelItem => item.FechaReservaSalida)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorReserva)
+                @Html.DisplayFor(modelItem => item.ValorPagar)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Email)
+                @Html.DisplayFor(modelItem => item.Cliente.Nombre)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.ReservaId" class="btn btn-warning btn-sm">Edit</a> 
-                    <a asp-action="Details" asp-route-id="@item.ReservaId" class="btn btn-info btn-sm">Details</a> 
-                    <a asp-action="Delete" asp-route-id="@item.ReservaId" class="btn btn-danger btn-sm">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ReservaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReservaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReservaId">Delete</a>
             </td>
         </tr>
 }

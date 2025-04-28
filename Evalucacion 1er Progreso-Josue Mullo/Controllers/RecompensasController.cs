@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Evalucacion_1er_Progreso_Josue_Mullo.Models;
+using Evaluacion_1er_Progreso_Josue_Mullo.Models;
 
 namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
 {
     public class RecompensasController : Controller
     {
-        private readonly Evalucacion_1er_Progreso_Josue_MulloContextSQLServer _context;
+        private readonly Evalucacion_1er_Progreso_Josue_MulloContext _context;
 
-        public RecompensasController(Evalucacion_1er_Progreso_Josue_MulloContextSQLServer context)
+        public RecompensasController(Evalucacion_1er_Progreso_Josue_MulloContext context)
         {
             _context = context;
         }
@@ -21,8 +21,8 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // GET: Recompensas
         public async Task<IActionResult> Index()
         {
-            var evalucacion_1er_Progreso_Josue_MulloContextSQLServer = _context.Recompensa.Include(r => r.Cliente);
-            return View(await evalucacion_1er_Progreso_Josue_MulloContextSQLServer.ToListAsync());
+            var evalucacion_1er_Progreso_Josue_MulloContext = _context.Recompensa.Include(r => r.Cliente);
+            return View(await evalucacion_1er_Progreso_Josue_MulloContext.ToListAsync());
         }
 
         // GET: Recompensas/Details/5
@@ -47,7 +47,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
         // GET: Recompensas/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email");
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", recompensa.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", recompensa.ClienteId);
             return View(recompensa);
         }
 
@@ -81,7 +81,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", recompensa.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", recompensa.ClienteId);
             return View(recompensa);
         }
 
@@ -117,7 +117,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Email", recompensa.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre", recompensa.ClienteId);
             return View(recompensa);
         }
 

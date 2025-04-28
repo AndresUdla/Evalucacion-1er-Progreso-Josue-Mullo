@@ -3,16 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
 {
-    [DbContext(typeof(Evalucacion_1er_Progreso_Josue_MulloContextSQLServer))]
-    partial class Evalucacion_1er_Progreso_Josue_MulloContextSQLServerModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Evalucacion_1er_Progreso_Josue_MulloContext))]
+    [Migration("20250428194255_JosueMullo")]
+    partial class JosueMullo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Evalucacion_1er_Progreso_Josue_Mullo.Models.Cliente", b =>
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Cliente", b =>
                 {
                     b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
@@ -29,14 +32,10 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EsActivo")
+                    b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("FechaRegistro")
+                    b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
@@ -52,7 +51,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.ToTable("Cliente");
                 });
 
-            modelBuilder.Entity("Evalucacion_1er_Progreso_Josue_Mullo.Models.Recompensa", b =>
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Recompensa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,19 +62,20 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FechaInicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("PuntosAcumulados")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoRecompensa")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoRecompensa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -84,7 +84,7 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.ToTable("Recompensa");
                 });
 
-            modelBuilder.Entity("Evalucacion_1er_Progreso_Josue_Mullo.Models.Reserva", b =>
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Reserva", b =>
                 {
                     b.Property<int>("ReservaId")
                         .ValueGeneratedOnAdd()
@@ -101,8 +101,8 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.Property<DateTime>("FechaReservaSalida")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ValorReserva")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ValorPagar")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ReservaId");
 
@@ -111,10 +111,10 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.ToTable("Reserva");
                 });
 
-            modelBuilder.Entity("Evalucacion_1er_Progreso_Josue_Mullo.Models.Recompensa", b =>
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Recompensa", b =>
                 {
-                    b.HasOne("Evalucacion_1er_Progreso_Josue_Mullo.Models.Cliente", "Cliente")
-                        .WithMany()
+                    b.HasOne("Evaluacion_1er_Progreso_Josue_Mullo.Models.Cliente", "Cliente")
+                        .WithMany("Recompensas")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -122,15 +122,22 @@ namespace Evalucacion_1er_Progreso_Josue_Mullo.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("Evalucacion_1er_Progreso_Josue_Mullo.Models.Reserva", b =>
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Reserva", b =>
                 {
-                    b.HasOne("Evalucacion_1er_Progreso_Josue_Mullo.Models.Cliente", "Cliente")
-                        .WithMany()
+                    b.HasOne("Evaluacion_1er_Progreso_Josue_Mullo.Models.Cliente", "Cliente")
+                        .WithMany("Reservas")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Evaluacion_1er_Progreso_Josue_Mullo.Models.Cliente", b =>
+                {
+                    b.Navigation("Recompensas");
+
+                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }
