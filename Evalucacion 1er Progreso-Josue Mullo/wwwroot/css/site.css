@@ -1,28 +1,97 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Fuentes generales */
 body {
-  margin-bottom: 60px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
 }
 
+/* Mejorar la apariencia del Navbar */
+.navbar {
+    background-color: #1b6ec2 !important; /* Color personalizado */
+}
+
+.navbar-brand {
+    font-size: 1.75rem; /* Ajustado para mayor énfasis */
+    font-weight: 700; /* Mejor legibilidad */
+    color: white !important;
+    letter-spacing: 1px; /* Espaciado sutil para un toque moderno */
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+    .navbar-nav .nav-link:hover {
+        background-color: #1861ac;
+        color: #fff;
+        border-radius: 20px; /* Bordes redondeados al pasar el mouse */
+    }
+
+/* Fondo del contenedor principal */
+.container {
+    margin-top: 30px; /* Un poco más de espacio superior */
+    margin-bottom: 30px; /* Un poco más de espacio inferior */
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Fondo y estilo del footer */
+.footer {
+    background-color: #1b6ec2;
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    font-size: 0.875rem; /* Texto más pequeño para un toque más elegante */
+}
+
+    .footer a {
+        color: #dbe3e7;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .footer a:hover {
+            color: #f1f3f5;
+        }
+
+/* Botones primarios */
+.btn-primary {
+    background-color: #1861ac;
+    border-color: #1861ac;
+    font-weight: 600;
+    text-transform: uppercase; /* Texto en mayúsculas */
+    padding: 10px 20px;
+    border-radius: 30px; /* Botones con bordes redondeados */
+}
+
+    .btn-primary:hover {
+        background-color: #1b6ec2;
+        border-color: #1b6ec2;
+    }
+
+/* Estilo de enlaces activos en nav */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: white !important;
+    background-color: #1861ac;
+    border-color: #1861ac;
+    border-radius: 50px; /* Bordes redondeados en el enlace activo */
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+/* Imagen de memes, ajustes para mejor visualización */
 .img-meme {
-    width: 400px;
-    height: 500px;
-    object-fit: cover; /* Esto asegura que la imagen se ajuste sin deformarse */
+    width: 100%;
+    height: auto;
+    max-width: 400px; /* Limitar el tamaño máximo */
+    object-fit: cover;
+    border-radius: 10px; /* Bordes redondeados */
 }
